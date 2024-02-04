@@ -21,11 +21,13 @@ public class UserController {
     private final UserService userService;
     private final UserMapper userMapper;
 
+
     @PostMapping
-    public UserDTO save(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> save(@RequestBody UserDTO userDTO) {
         User user = userMapper.toEntity(userDTO);
         User savedUser = userService.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(userMapper.toDTO(savedUser)).getBody();
+        UserDTO savedUserDTO = userMapper.toDTO(savedUser);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedUserDTO);
     }
 
 
