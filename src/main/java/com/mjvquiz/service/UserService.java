@@ -25,11 +25,11 @@ public class UserService {
 
         return userMapper.toDTO(userRepository.save(userMapper.toEntity(userDTO)));
     }
-
+    @Transactional
     public User findById(Long id){
         return userRepository.findById(id).orElseThrow();
     }
-
+    @Transactional
     public List<UserDTO> findAll(){
         return userMapper.toListDTO(userRepository.findAll());
     }
