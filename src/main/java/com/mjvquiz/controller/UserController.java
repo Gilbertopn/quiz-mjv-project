@@ -7,10 +7,10 @@ import com.mjvquiz.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -24,11 +24,24 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserDTO> save(@RequestBody UserDTO userDTO) {
-        User user = userMapper.toEntity(userDTO);
-        User savedUser = userService.save(user);
-        UserDTO savedUserDTO = userMapper.toDTO(savedUser);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedUserDTO);
+        UserDTO userDTO1 = userService.save(userDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userDTO1);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDTO> getById(@PathVariable Long id){
+        User user = userService.findById(id);
+        UserDTO userDTO = userMapper.toDTO(user);
+        return ResponseEntity.ok(userDTO);
+
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserDTO>> getAll(){
+        List<UserDTO> userDTO = userService.findAll();
+        return ResponseEntity.ok(userDTO);
+    }
+
 
 
 
