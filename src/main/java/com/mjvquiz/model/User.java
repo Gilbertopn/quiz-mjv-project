@@ -9,16 +9,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name", length = 255, nullable = true)
+    @Column(name = "name", length = 255, nullable = false)
     private String name;
 
-    @Column(name = "full_name", length = 255, nullable = true)
+    @Column(name = "full_name", length = 255, nullable = false)
     private String fullName;
-    @Column(name = "age", length = 255, nullable = true)
+    @Column(name = "age", length = 150, nullable = false)
     private Integer age;
-    @Column(name = "email", length = 100, nullable = true)
+    @Column(name = "email", length = 100, nullable = false, unique = true)
     private String email;
-    @Column(name = "password", length = 255, nullable = true)
+    @Column(name = "password", length = 255, nullable = false)
     private String password;
 
     public User() {

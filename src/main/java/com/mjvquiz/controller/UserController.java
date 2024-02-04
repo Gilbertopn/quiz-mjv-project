@@ -5,6 +5,8 @@ import com.mjvquiz.dto.UserDTO;
 import com.mjvquiz.model.User;
 import com.mjvquiz.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +25,7 @@ public class UserController {
     public UserDTO save(@RequestBody UserDTO userDTO) {
         User user = userMapper.toEntity(userDTO);
         User savedUser = userService.save(user);
-        return userMapper.toDTO(savedUser);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userMapper.toDTO(savedUser)).getBody();
     }
 
 
