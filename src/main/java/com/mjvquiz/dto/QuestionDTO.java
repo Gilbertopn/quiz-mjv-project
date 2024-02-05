@@ -1,5 +1,7 @@
 package com.mjvquiz.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,14 +13,23 @@ import java.util.ArrayList;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class QuestionDTO {
 
+    @JsonProperty("id")
     private Long id;
+
+    @JsonProperty("theme")
     private String theme;
+
+    @JsonProperty("question")
     private String question;
-    //private String response;
-    private Long correctQuestionAlternativeID;
-    private ArrayList<QuestionAlternativeDTO> questionAlternativeDTOArrayList;
+
+    @JsonProperty("response")
+    private String response;
+
+    @JsonProperty("alternativeList")
+    private ArrayList<AlternativeDTO> alternativeList = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -26,8 +37,7 @@ public class QuestionDTO {
                 "\nid = " + id +
                 "\ntheme = " + theme +
                 "\nquestion = " + question +
-                //"\nresponse = " + response +
-                "\ncorrectQuestionAlternativeID = " + correctQuestionAlternativeID +
-                "\nquestionAlternativeDTOArrayList = " + questionAlternativeDTOArrayList;
+                "\nresponse = " + response +
+                "\nquestionAlternativeDTOArrayList = " + alternativeList;
     }
 }

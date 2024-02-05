@@ -23,7 +23,7 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<UserDTO> save(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> create(@RequestBody UserDTO userDTO) {
         UserDTO userDTO1 = userService.save(userDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(userDTO1);
     }
